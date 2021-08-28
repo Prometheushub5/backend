@@ -36,7 +36,12 @@ module.exports = {
       },
 //grau de ortogação
       grau_academico:{
-        type:Sequelize.STRING,
+        type:Sequelize.ENUM,
+        values:[
+          'BACHARELADO',
+          'LICENCIATURA',
+          'TECNOLÓGICO'
+        ],
         allowNull:true,
          },
 //nova tabela modalidade (presencial, semi, remoto)
