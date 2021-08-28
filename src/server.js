@@ -1,3 +1,4 @@
+require ('dotenv/config')
 import app from './app'
 
-app.listen(3333); //mudar a porta para entrar em produção (8080)
+app.listen(process.env.PORT);
