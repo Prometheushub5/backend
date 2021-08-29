@@ -59,7 +59,11 @@ module.exports = {
         allowNull: false,
       },
 //data de criação do curso na tabela
-      create_at: {
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       }
