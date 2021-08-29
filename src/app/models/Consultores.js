@@ -29,7 +29,6 @@ class Consultores extends Model {
             },
               hash_senha: {
                 type: Sequelize.STRING,
-                allowNull: false,
               },
               created_at: {
                 type: Sequelize.DATE,
