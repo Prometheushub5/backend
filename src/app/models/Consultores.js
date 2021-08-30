@@ -47,7 +47,7 @@ class Consultores extends Model {
         });
         this.addHook('beforeSave', async consultor => {
             if (consultor.senha){
-              consultor.hash_senha = await bcrypt.hash(consultor.senha, 12)
+              consultor.hash_senha = await bcrypt.hash(consultor.senha, 1)
             }
           });
         return this;

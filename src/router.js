@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import Clientes from './app/models/Clientes';
 import Consultores from './app/models/Consultores';
 import Cursos from './app/models/Cursos';
 import Database from './database';
@@ -12,12 +13,20 @@ const routes = new Router();
 // })
 routes.get('/', async(req,res)=>{
 
-    const consultor = await Consultores.create({
-        nome: 'Consultor 01',
-        email: 'consultor@consultoria.com',
-        senha: 'senha',
-        whats: '43999999999'
+    const cliente = await Clientes.create({
+        nome: 'CLIENTE 01',
+        cpf: 'CPF',
+        cep: 'CEP',
+        logradouro: 'LOGRADOURO',
+        numero: 'numero',
+        bairro: 'bairro',
+        cidade: 'CIDADE',
+        uf: 'UF',
+        email: 'EMAIL@.COM',
+        telefone: 'telefone',
+        whats: '43999999999',
+        curso_id: '2'
     });
-    return res.json(consultor)
-}); //apenas para testar a criação de consultor
+    return res.json(cliente)
+}); //apenas para testar a criação de cliente
 export default routes;

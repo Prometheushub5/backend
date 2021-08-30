@@ -1,9 +1,10 @@
 import { Sequelize } from 'sequelize';
+import Clientes from '../app/models/Clientes';
 import Consultores from '../app/models/Consultores';
 import Cursos from '../app/models/Cursos';
 import databaseConfig from '../config/database';
 
-const models = [Cursos, Consultores];
+const models = [Cursos, Consultores, Clientes];
 
 class Database {
   constructor() {
