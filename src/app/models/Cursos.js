@@ -68,6 +68,10 @@ class Cursos extends Model {
           tableName: 'cursos',
         });
     }
+    static associate = (models) => {
+      Cursos.hasMany(models.Clientes,
+        { foreignKey: 'cliente_id', as: 'cliente' });
+    };
 }
 
 export default Cursos;

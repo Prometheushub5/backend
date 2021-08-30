@@ -14,7 +14,7 @@ const routes = new Router();
 routes.get('/', async(req,res)=>{
 
     const cliente = await Clientes.create({
-        nome: 'CLIENTE 01',
+        nome: 'CLIENTE 02',
         cpf: 'CPF',
         cep: 'CEP',
         logradouro: 'LOGRADOURO',
@@ -22,7 +22,7 @@ routes.get('/', async(req,res)=>{
         bairro: 'bairro',
         cidade: 'CIDADE',
         uf: 'UF',
-        email: 'EMAIL@.COM',
+        email: 'EMAIL3@.COM',
         telefone: 'telefone',
         whats: '43999999999',
         curso_id: '2'
