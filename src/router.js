@@ -22,11 +22,11 @@ routes.get('/', async(req,res)=>{
         bairro: 'bairro',
         cidade: 'CIDADE',
         uf: 'UF',
-        email: 'EMAIL3@.COM',
+        email: 'EMAIL5@.COM',
         telefone: 'telefone',
         whats: '43999999999',
         curso_id: '2'
     });
     return res.json(cliente)
 }); //apenas para testar a criação de cliente
-export default routes;
+export default routes;//teste commit
