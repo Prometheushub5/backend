@@ -16,6 +16,7 @@ module.exports = {
       cpf:{
         type: Sequelize.STRING,
         allowNull: false,
+        //unico mudar
       },
       cep:{
         type:  Sequelize.STRING,

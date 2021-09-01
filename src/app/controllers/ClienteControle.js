@@ -2,8 +2,18 @@ import Clientes from "../models/Clientes";
 
 class ClienteControle{
     async store(req,res){
-        const curso = await Clientes.create(req.body);
-        return res.json(curso);
+        const clienteExiste = await Clientes.findOne({
+
+            where: {email: req.body.email},
+            where:{cpf: req.body.cpf}
+        })
+        if (clienteExiste){
+            return res.status(400).json({
+                error: 'Cliente já cadastrado'
+            })
+        }
+        const cliente = await Clientes.create(req.body);
+        return res.json(cliente);
     }
 
 }
