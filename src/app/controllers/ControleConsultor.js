@@ -1,6 +1,6 @@
 import Consultores from "../models/Consultores";
 
-class ConsultorControle{
+class ControleConsultor{
     async store(req,res){
         const consultorExiste = await Consultores.findOne({
             where: {email:req.body.email}
@@ -16,4 +16,4 @@ class ConsultorControle{
 
 }
 
-export default new ConsultorControle();
+export default new ControleConsultor();

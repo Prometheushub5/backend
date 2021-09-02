@@ -1,6 +1,6 @@
 import Cursos from "../models/Cursos";
 
-class CursoControle{
+class ControleCurso{
     async store(req,res){
         const curso = await Cursos.create (req.body);
         return res.json(curso);
@@ -9,4 +9,4 @@ class CursoControle{
 }
 
 
-export default new CursoControle();
+export default new ControleCurso();

@@ -1,6 +1,6 @@
 import Clientes from "../models/Clientes";
 
-class ClienteControle{
+class ControleCliente{
     async store(req,res){
         const clienteExiste = await Clientes.findOne({
 
@@ -18,4 +18,4 @@ class ClienteControle{
 
 }
 
-export default new ClienteControle();
+export default new ControleCliente();

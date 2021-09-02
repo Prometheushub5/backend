@@ -1,19 +1,19 @@
 import {Router} from 'express';
-import ClienteControle from './app/controllers/ClienteControle';
-import ConsultorControle from './app/controllers/ConsultorControle';
-import CursoControle from './app/controllers/CursoControle';
+import ControleCliente from './app/controllers/ControleCliente';
+import ControleConsultor from './app/controllers/ControleConsultor';
+import ControleCurso from './app/controllers/ControleCurso';
 import Database from './database';
 
 
 Database.init();
 const routes = new Router();
-//rotas cursos
-routes.post('/cursos',CursoControle.store); 
 
-//rotas clientes
-routes.post('/clientes',ClienteControle.store);
+routes.post('/cursos',ControleCurso.store); 
 
-//rotas consultores
-routes.post('/consultores', ConsultorControle.store);
 
-export default routes;//teste commit
+routes.post('/clientes',ControleCliente.store);
+
+
+routes.post('/consultores', ControleConsultor.store);
+
+export default routes;
