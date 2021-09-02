@@ -2,10 +2,10 @@ import Consultores from "../models/Consultores";
 
 class ControleConsultor{
     async store(req,res){
-        const consultorExiste = await Consultores.findOne({
+        const ExisteConsultor = await Consultores.findOne({
             where: {email:req.body.email}
         })
-        if (consultorExiste){
+        if (ExisteConsultor){
             return res.status(400).json({
                 error: 'Consultor já cadastrado'
             })
