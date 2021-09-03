@@ -8,7 +8,7 @@ const models = [Cursos, Consultores, Clientes];
 
 class Database {
   constructor() {
-    this.init()
+    this.init();
   }
 
   init() {
