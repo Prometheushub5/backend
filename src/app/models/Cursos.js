@@ -61,7 +61,14 @@ class Cursos extends Model {
                 type: Sequelize.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.NOW
-              }
+              },
+        //     clientes_id: {
+        //       type: Sequelize.INTEGER,
+        //       references: { model: 'clientes', key: 'id' },
+        //       onUpdate: 'CASCADE',
+        //       onDelete: 'SET NULL',
+        //       allowNull: true,
+        // }
         },
         {
           sequelize,
@@ -70,7 +77,7 @@ class Cursos extends Model {
     }
     static associate = (models) => {
       Cursos.hasMany(models.Clientes,
-        { foreignKey: 'cliente_id', as: 'cliente' });
+        { foreignKey: 'clientes_id', as: 'cliente' });
     };
 }
 

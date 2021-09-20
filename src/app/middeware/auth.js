@@ -7,7 +7,7 @@ export default async ( req, res, next ) => {
   const authHeaders = req.headers.authorization;
 
   if (!authHeaders){
-    return res.status(401).json({ message: 'Login necessario'})
+    return res.status(401).json({ message: 'Para Acessar esta rota é necessário estar logado'})
   }
   
   const [, token] = authHeaders.split(' ');
@@ -15,11 +15,11 @@ export default async ( req, res, next ) => {
   try {
 
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
-    req.userID = decoded.id;
+    req.consultorID = decoded.id;
     next();
 
   } catch (err) {
-    return res.status(401).json({ message: 'Erro Token})
+    return res.status(401).json({ message: 'Token inválido'})
   }
 
 }

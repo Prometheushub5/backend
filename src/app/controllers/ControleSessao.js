@@ -18,7 +18,6 @@ class ControleSessao{
     }
 
     const { id, nome, whats } = consultor;
-    console.log(authConfig.secret)
 
     res.json({ 
       consultor: {
