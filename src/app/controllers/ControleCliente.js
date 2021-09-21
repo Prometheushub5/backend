@@ -18,8 +18,18 @@ class ControleCliente{
         return res.json(cliente);
     }
     async index(req, res){
+        const {id} = req.query
+        if(id){ 
+            const cliente = await Clientes.findOne({
+            where: {id:id}
+        });
+        if(cliente){
+            return res.status(200).json({cliente: cliente});
+        }
+        return res.status(400).json({
+            error: 'Id não existe'});
+    }
         const {page} = req.query;
-
         const clientes = await Clientes.findAll({
             order : ['updated_at'],
             attributes: ['id','nome','status'],

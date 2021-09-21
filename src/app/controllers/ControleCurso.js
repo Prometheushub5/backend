@@ -7,13 +7,24 @@ class ControleCurso{
         return res.json(curso);
     }
     async index(req, res) {
-    const { page } = req.query;
+      const {id} = req.query
+      if(id){ 
+          const curso = await Cursos.findOne({
+          where: {id:id}
+      });
+      if(curso){
+          return res.status(200).json({curso: curso});
+      }
+      return res.status(400).json({
+        error: 'Id não existe'});
+    }
+      const { page } = req.query;
 
-    const cursos = await Cursos.findAll({
-      order: ['id'],
-      attributes: ['id','nome', 'nivel_ensino', 'grau_academico', 'modalidade','unidade', 'created_at'],
-      limit: 3,
-      offset: (page -1) * 3,
+      const cursos = await Cursos.findAll({
+        order: ['id'],
+        attributes: ['id','nome', 'nivel_ensino', 'grau_academico', 'modalidade','unidade', 'created_at'],
+        limit: 3,
+        offset: (page -1) * 3,
     //   include: [
     //     {
     //       model: Clientes,
@@ -21,12 +32,12 @@ class ControleCurso{
     //       attributes: ['id', 'nome'],
     //     }
     //   ]
-    })
+      })
 
-    return res.status(200).json({ register: page,
-      cursos: cursos
-    });
-  }
+      return res.status(200).json({ register: page,
+        cursos: cursos
+      });
+   }
 }
 
 
