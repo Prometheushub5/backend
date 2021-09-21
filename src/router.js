@@ -4,10 +4,7 @@ import ControleConsultor from './app/controllers/ControleConsultor';
 import ControleCurso from './app/controllers/ControleCurso';
 import ControleSessao from './app/controllers/ControleSessao';
 import Porteiro from './app/middeware/auth';
-// import Database from './database';
 
-
-// Database.init();
 const rotas = new Router();
 rotas.post('/v1.0/clientes/criar/',ControleCliente.criar); //criar clientes
 rotas.get('/v1.0/cursos/consulta/',ControleCurso.lista); //listar cursos
