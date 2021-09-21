@@ -2,11 +2,11 @@ import Clientes from "../models/Clientes";
 import Cursos from "../models/Cursos";
 
 class ControleCurso{
-    async store(req,res){
+    async criar(req,res){
         const curso = await Cursos.create (req.body);
         return res.json(curso);
     }
-    async index(req, res) {
+    async lista(req, res) {
       const {id} = req.query
       if(id){ 
           const curso = await Cursos.findOne({
@@ -18,7 +18,7 @@ class ControleCurso{
       return res.status(400).json({
         error: 'Id não existe'});
     }
-      const { page } = req.query;
+      const { page = 1 } = req.query;
 
       const cursos = await Cursos.findAll({
         order: ['id'],

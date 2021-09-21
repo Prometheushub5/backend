@@ -1,7 +1,7 @@
 import Clientes from '../models/Clientes'
 import {Op} from 'sequelize';
 class ControleCliente{
-    async store(req,res){
+    async criar(req,res){
         const ExisteCliente = await Clientes.findOne({
             where: {
                 [Op.or]: [
@@ -17,7 +17,7 @@ class ControleCliente{
         const cliente = await Clientes.create(req.body);
         return res.json(cliente);
     }
-    async index(req, res){
+    async lista(req, res){
         const {id} = req.query
         if(id){ 
             const cliente = await Clientes.findOne({
@@ -29,7 +29,7 @@ class ControleCliente{
         return res.status(400).json({
             error: 'Id não existe'});
     }
-        const {page} = req.query;
+        const {page = 1} = req.query;
         const clientes = await Clientes.findAll({
             order : ['updated_at'],
             attributes: ['id','nome','status'],

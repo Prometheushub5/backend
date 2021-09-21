@@ -4,7 +4,7 @@ import Consultores from '../models/Consultores';
 import authConfig from '../../config/auth';
 
 class ControleSessao{
-  async store(req, res){
+  async verificar(req, res){
     const { email, senha } = req.body;
 
     const consultor = await Consultores.findOne({ where: { email }});

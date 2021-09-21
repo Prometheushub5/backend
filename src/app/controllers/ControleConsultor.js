@@ -1,7 +1,7 @@
 import Consultores from "../models/Consultores";
 
 class ControleConsultor{
-    async store(req,res){
+    async criar(req,res){
         const ExisteConsultor = await Consultores.findOne({
             where: {email:req.body.email}
         })

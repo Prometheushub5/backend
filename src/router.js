@@ -8,15 +8,15 @@ import Porteiro from './app/middeware/auth';
 
 
 // Database.init();
-const routes = new Router();
-routes.post('/clientes',ControleCliente.store); //criar clientes
-routes.get('/cursos',ControleCurso.index); //listar cursos
-routes.post('/login', ControleSessao.store); //login
-routes.use(Porteiro) //apartir daqui somente logado
-routes.post('/cursos',ControleCurso.store); //criar cursos
-routes.post('/consultores', ControleConsultor.store); //criar consultores
-routes.get('/clientes',ControleCliente.index) //listar clientes
+const rotas = new Router();
+rotas.post('/v1.0/clientes/criar/',ControleCliente.criar); //criar clientes
+rotas.get('/v1.0/cursos/consulta/',ControleCurso.lista); //listar cursos
+rotas.post('/login', ControleSessao.verificar); //login
+rotas.use(Porteiro) //apartir daqui somente logado
+rotas.post('/v1.0/cursos/criar',ControleCurso.criar); //criar cursos
+rotas.post('/v1.0/consultores/criar', ControleConsultor.criar); //criar consultores
+rotas.get('/v1.0/clientes/consulta/',ControleCliente.lista) //listar clientes
 
 
 
-export default routes;
+export default rotas;
