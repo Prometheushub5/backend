@@ -7,12 +7,13 @@ import Porteiro from './app/middeware/auth';
 
 const rotas = new Router();
 rotas.post('/v1.0/clientes/criar/',ControleCliente.criar); //criar clientes
-rotas.get('/v1.0/cursos/consulta/',ControleCurso.lista); //listar cursos
+rotas.get('/v1.0/cursos/consulta/',ControleCurso.listar); //listar cursos
 rotas.post('/login', ControleSessao.verificar); //login
 rotas.use(Porteiro) //apartir daqui somente logado
-rotas.post('/v1.0/cursos/criar',ControleCurso.criar); //criar cursos
-rotas.post('/v1.0/consultores/criar', ControleConsultor.criar); //criar consultores
-rotas.get('/v1.0/clientes/consulta/',ControleCliente.lista) //listar clientes
+rotas.post('/v1.0/cursos/criar/',ControleCurso.criar); //criar cursos
+rotas.post('/v1.0/consultores/criar/', ControleConsultor.criar); //criar consultores
+rotas.put('/v1.0/consutores/update/',ControleConsultor.update); //update de senha e email de consultor
+rotas.get('/v1.0/clientes/consulta/',ControleCliente.listar); //LISTA CLIENTES POR ID, STATUS OU TODOS
 
 
 

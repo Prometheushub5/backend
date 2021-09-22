@@ -17,8 +17,18 @@ class ControleCliente{
         const cliente = await Clientes.create(req.body);
         return res.json(cliente);
     }
-    async lista(req, res){
-        const {id} = req.query
+    async listar(req, res){
+        const {id, status, page = 1} = req.query
+        const valores=[            
+            'NOVO',
+            'EM_ATENDIMENTO',
+            'CONTRATADO',
+            'DESISTENTE'
+          ];
+          if (id && status){
+            return res.status(400).json({
+                erro: 'Id não pode ser ususado em conjunto com status'});
+          };
         if(id){ 
             const cliente = await Clientes.findOne({
             where: {id:id}
@@ -27,9 +37,24 @@ class ControleCliente{
             return res.status(200).json({cliente: cliente});
         }
         return res.status(400).json({
-            error: 'Id não existe'});
+            error: 'id invalido'});
     }
-        const {page = 1} = req.query;
+        if(status){
+            if(valores.indexOf(status) > -1){
+                const clientes = await Clientes.findAll({
+                    where: {status: status},
+                    order : ['updated_at'],
+                    attributes: ['id','nome',['updated_at', 'atualizado']],
+                    limit: 3,
+                    offset: (page -1) * 3
+                })
+                return res.status(200).json({status : status, pagina: page, clientes: clientes})
+                
+            }
+            return res.status(400).json({
+                    error: 'status invalido'});
+        }
+
         const clientes = await Clientes.findAll({
             order : ['updated_at'],
             attributes: ['id','nome','status'],
@@ -37,8 +62,9 @@ class ControleCliente{
             offset: (page -1) * 3,
 
         });
-        return res.status(200).json({register: page, clientes: clientes});
+        return res.status(200).json({pagina: page, clientes: clientes});
     }
+
 }
 
 export default new ControleCliente();

@@ -6,7 +6,7 @@ class ControleCurso{
         const curso = await Cursos.create (req.body);
         return res.json(curso);
     }
-    async lista(req, res) {
+    async listar(req, res) {
       const {id} = req.query
       if(id){ 
           const curso = await Cursos.findOne({
@@ -16,13 +16,13 @@ class ControleCurso{
           return res.status(200).json({curso: curso});
       }
       return res.status(400).json({
-        error: 'Id não existe'});
+        error: 'id invalido'});
     }
       const { page = 1 } = req.query;
 
       const cursos = await Cursos.findAll({
         order: ['id'],
-        attributes: ['id','nome', 'nivel_ensino', 'grau_academico', 'modalidade','unidade', 'created_at'],
+        attributes: ['id','nome', 'nivel_ensino'],
         limit: 3,
         offset: (page -1) * 3,
     //   include: [
@@ -34,7 +34,7 @@ class ControleCurso{
     //   ]
       })
 
-      return res.status(200).json({ register: page,
+      return res.status(200).json({ pagina: page,
         cursos: cursos
       });
    }
