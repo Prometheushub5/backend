@@ -7,7 +7,7 @@ export default async ( req, res, next ) => {
   const authHeaders = req.headers.authorization;
 
   if (!authHeaders){
-    return res.status(401).json({ message: 'Para Acessar esta rota é necessário estar logado'})
+    return res.status(401).json({ Mensagem: 'Para Acessar esta rota é necessário estar logado'})
   }
   
   const [, token] = authHeaders.split(' ');
@@ -19,7 +19,7 @@ export default async ( req, res, next ) => {
     next();
 
   } catch (err) {
-    return res.status(401).json({ message: 'Token inválido'})
+    return res.status(401).json({ Mensagem: 'Token inválido'})
   }
 
 }

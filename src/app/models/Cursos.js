@@ -62,13 +62,6 @@ class Cursos extends Model {
                 allowNull: false,
                 defaultValue: Sequelize.NOW
               },
-        //     clientes_id: {
-        //       type: Sequelize.INTEGER,
-        //       references: { model: 'clientes', key: 'id' },
-        //       onUpdate: 'CASCADE',
-        //       onDelete: 'SET NULL',
-        //       allowNull: true,
-        // }
         },
         {
           sequelize,

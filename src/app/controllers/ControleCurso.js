@@ -1,5 +1,6 @@
 import Clientes from "../models/Clientes";
 import Cursos from "../models/Cursos";
+import * as Yup from 'yup';
 
 class ControleCurso{
     async criar(req,res){
@@ -38,6 +39,56 @@ class ControleCurso{
         cursos: cursos
       });
    }
+   async update(req, res) {
+
+    const modelo = Yup.object().shape({
+      id: Yup.number().required(),
+      nome: Yup.string(),
+      nivel_ensino:Yup.string().oneOf([
+          'LATO SENSU',
+          'FORMAÇÃO COMPLEMENTAR',
+          'GRADUAÇÃO',
+          'DOUTORADO',
+          'TÉCNICO',
+          'RESIDÊNCIA',
+          'MESTRADO',
+          'FUNDAMENTAL',
+          'TÉCNICO INTEGRADO',
+          'MÉDIO',
+          'INFANTIL'
+          ]),
+      grau_academico:Yup.string().oneOf([
+          'BACHARELADO',
+          'LICENCIATURA',
+          'TECNOLÓGICO'
+        ]),
+      modalidade:Yup.string().oneOf([
+          'PRESENCIAL',
+          'SEMI-PRESENCIAL',
+          'REMOTO']),
+      unidade: Yup.string()
+      });
+
+    if (!(await modelo.isValid(req.body))){
+      return res.status(400).json({ Mensagem: 'Entrada não permitida'})
+    }
+
+    const curso = await Cursos.findByPk(req.body.id);
+
+    if (curso){
+        const { id, nome, nivel_ensino, grau_academico, modalidade, unidade} = await curso.update(req.body);
+        return res.status(200).json({
+      id,
+      nome,
+      nivel_ensino, 
+      grau_academico, 
+      modalidade, 
+      unidade
+        })
+      }
+      return res.status(400).json({ Mensagem: 'ID não existe'})
+
+  }
 }
 
 

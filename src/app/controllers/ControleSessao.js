@@ -10,11 +10,11 @@ class ControleSessao{
     const consultor = await Consultores.findOne({ where: { email }});
 
     if (!consultor){
-      return res.status(401).json({ message: 'Usuário não encontrado' });
+      return res.status(401).json({ Mensagem: 'Usuário não encontrado' });
     }
 
     if (!(await consultor.checkPassword(senha))){
-      return res.status(401).json({ message: 'Senha inválida'})
+      return res.status(401).json({ Mensagem: 'Senha inválida'})
     }
 
     const { id, nome, whats } = consultor;

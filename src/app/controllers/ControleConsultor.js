@@ -27,7 +27,7 @@ class ControleConsultor{
         });
     
         if (!(await modelo.isValid(req.body))){
-          return res.status(400).json({ message: 'Falta de dados', message2: 'email;senhaAntiga;senha;senhaConfirma'})
+          return res.status(400).json({ Mensagem: 'Falta de dados', Mensagem2: 'email;senhaAntiga;senha;senhaConfirma'})
         }
         const { email, senhaAntiga } = await req.body;
     
@@ -41,7 +41,7 @@ class ControleConsultor{
         }
     
         if( senhaAntiga && !(await consultor.checkPassword(senhaAntiga))) {
-          return res.status(400).json({ message: 'A senha não confere'})
+          return res.status(400).json({ Mensagem: 'A senha não confere'})
         }
         const { id, nome } = await consultor.update(req.body);
     
