@@ -52,6 +52,13 @@ class Cursos extends Model {
                 type: Sequelize.STRING,
                 allowNull: false,
               },
+            consultor_id: {
+                type: Sequelize.INTEGER,
+                references: { model: 'consultores', key: 'id' },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
+                allowNull: true,
+              },
             created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,
@@ -67,6 +74,9 @@ class Cursos extends Model {
           sequelize,
           tableName: 'cursos',
         });
+    }
+    static associate(models) {
+      this.belongsTo( models.Consultores, { foreignKey: 'consultor_id', as: 'consultor'} )
     }
     static associate = (models) => {
       Cursos.hasMany(models.Clientes,

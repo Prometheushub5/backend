@@ -4,7 +4,38 @@ import * as Yup from 'yup';
 
 class ControleCurso{
     async criar(req,res){
-        const curso = await Cursos.create (req.body);
+      const modelo = Yup.object().shape({
+        nome: Yup.string().required(),
+        nivel_ensino:Yup.string().oneOf([
+            'LATO SENSU',
+            'FORMAÇÃO COMPLEMENTAR',
+            'GRADUAÇÃO',
+            'DOUTORADO',
+            'TÉCNICO',
+            'RESIDÊNCIA',
+            'MESTRADO',
+            'FUNDAMENTAL',
+            'TÉCNICO INTEGRADO',
+            'MÉDIO',
+            'INFANTIL'
+            ]),
+        grau_academico:Yup.string().oneOf([
+            'BACHARELADO',
+            'LICENCIATURA',
+            'TECNOLÓGICO'
+          ]),
+        modalidade:Yup.string().oneOf([
+            'PRESENCIAL',
+            'SEMI-PRESENCIAL',
+            'REMOTO']).required(),
+        unidade: Yup.string().required()
+        });
+        if (!(await modelo.isValid(req.body))){
+          return res.status(400).json({ Mensagem: 'Entrada não permitida'})
+        }
+        const novocurso = Object.assign({}, req.body);
+        novocurso.consultor_id = req.consultorID;
+        const curso = await Cursos.create (novocurso);
         return res.json(curso);
     }
     async listar(req, res) {

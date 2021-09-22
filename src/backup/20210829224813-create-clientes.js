@@ -62,6 +62,13 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: true,
     },
+      consultor_id: {
+      type: Sequelize.INTEGER,
+      references: { model: 'consultores', key: 'id' },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+  },
       status:{
         type: Sequelize.ENUM,
         values:[

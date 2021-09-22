@@ -58,6 +58,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      consultor_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'consultores', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
+    },
 //data de criação do curso na tabela
       created_at: {
         type: Sequelize.DATE,

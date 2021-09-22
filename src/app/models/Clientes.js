@@ -61,6 +61,13 @@ class Clientes extends Model {
             onDelete: 'SET NULL',
             allowNull: true,
         },
+          consultor_id: {
+            type: Sequelize.INTEGER,
+            references: { model: 'consultores', key: 'id' },
+            onUpdate: 'CASCADE',
+            onDelete: 'SET NULL',
+            allowNull: true,
+        },
           status:{
             type: Sequelize.ENUM,
             values:[
@@ -91,6 +98,9 @@ class Clientes extends Model {
     }
     static associate(models) {
         this.belongsTo( models.Cursos, { foreignKey: 'curso_id', as: 'curso'} )
+      }
+      static associate(models) {
+        this.belongsTo( models.Consultores, { foreignKey: 'consultor_id', as: 'consultor'} )
       }
 }
 

@@ -2,5 +2,5 @@ Falta criar rotas de:
 Update cursos #FEITO
 Update de senha #FEITO
 update de status de cliente (novo, em atendimento)
-Criar relacionamento de consultor para cliente (1 consultor para muitos clientes)
-Criar coluna na tabela clientes para receber consultor(atendente);
+Criar relacionamento de consultor para cliente (1 consultor para muitos clientes)#FEITO
+Criar coluna na tabela clientes para receber consultor(atendente);#FEITO

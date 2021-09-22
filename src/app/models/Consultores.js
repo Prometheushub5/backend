@@ -54,7 +54,11 @@ class Consultores extends Model {
     }
     checkPassword(senha){
         return bcrypt.compare(senha, this.hash_senha)
-      }   
+      }
+    static associate = (models) => {
+        Cursos.hasMany(models.Clientes,
+          { foreignKey: 'clientes_id', as: 'cliente' });
+        }  
 }
 
 

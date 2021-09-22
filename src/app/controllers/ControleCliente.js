@@ -64,7 +64,9 @@ class ControleCliente{
         });
         return res.status(200).json({pagina: page, clientes: clientes});
     }
-
+    async atendimento(req, res){
+        
+    }
 }
 
 export default new ControleCliente();
