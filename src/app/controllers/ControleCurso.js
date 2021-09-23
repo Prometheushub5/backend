@@ -71,7 +71,6 @@ class ControleCurso{
       });
    }
    async update(req, res) {
-
     const modelo = Yup.object().shape({
       id: Yup.number().required(),
       nome: Yup.string(),
@@ -107,15 +106,10 @@ class ControleCurso{
     const curso = await Cursos.findByPk(req.body.id);
 
     if (curso){
-        const { id, nome, nivel_ensino, grau_academico, modalidade, unidade} = await curso.update(req.body);
-        return res.status(200).json({
-      id,
-      nome,
-      nivel_ensino, 
-      grau_academico, 
-      modalidade, 
-      unidade
-        })
+      const atualizacao = Object.assign({}, req.body);
+      atualizacao.consultor_id = req.consultorID;
+      const curso_atualizado = await curso.update(atualizacao);
+        return res.status(200).json(curso_atualizado)
       }
       return res.status(400).json({ Mensagem: 'ID não existe'})
 

@@ -1,6 +1,7 @@
 import Clientes from '../models/Clientes'
 import {Op} from 'sequelize';
 import * as Yup from 'yup';
+import Consultores from '../models/Consultores';
 
 class ControleCliente{
     async criar(req,res){
@@ -81,10 +82,11 @@ class ControleCliente{
           }
         const dados = Object.assign({}, req.body);
         dados.consultor_id = req.consultorID;
+        const consultor = await Consultores.findByPk(req.consultorID);
         const cliente = await Clientes.findByPk(dados.id);
         if(cliente){
             const novo_status = await cliente.update(dados);
-            return res.status(200).json({Atualizado: cliente});
+            return res.status(200).json({nome:cliente.nome, id: cliente.id, consultor: consultor.nome, status:cliente.status});
         }
         return res.status(400).json({
             error: 'id invalido'});
