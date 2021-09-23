@@ -15,6 +15,7 @@ rotas.put('/v1.0/cursos/update/',ControleCurso.update); //update cursos
 rotas.post('/v1.0/consultores/criar/', ControleConsultor.criar); //criar consultores
 rotas.put('/v1.0/consutores/update/',ControleConsultor.update); //update de senha e/ou email de consultor
 rotas.get('/v1.0/clientes/consulta/',ControleCliente.listar); //LISTA CLIENTES POR ID, STATUS OU TODOS
+rotas.put('/v1.0/clientes/atendimento/',ControleCliente.atendimento)
 
 
 

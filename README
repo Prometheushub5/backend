@@ -1,6 +1,7 @@
 Falta criar rotas de:
 Update cursos #FEITO
 Update de senha #FEITO
-update de status de cliente (novo, em atendimento)
+update de status de cliente (novo, em atendimento)#FEITO
 Criar relacionamento de consultor para cliente (1 consultor para muitos clientes)#FEITO
 Criar coluna na tabela clientes para receber consultor(atendente);#FEITO
+Atualizar controleCliente com YUP

@@ -1,5 +1,7 @@
 import Clientes from '../models/Clientes'
 import {Op} from 'sequelize';
+import * as Yup from 'yup';
+
 class ControleCliente{
     async criar(req,res){
         const ExisteCliente = await Clientes.findOne({
@@ -17,6 +19,7 @@ class ControleCliente{
         const cliente = await Clientes.create(req.body);
         return res.json(cliente);
     }
+
     async listar(req, res){
         const {id, status, page = 1} = req.query
         const valores=[            
@@ -65,7 +68,26 @@ class ControleCliente{
         return res.status(200).json({pagina: page, clientes: clientes});
     }
     async atendimento(req, res){
-        
+        const modelo = Yup.object().shape({
+            id: Yup.number().required(),
+            status: Yup.string().required().oneOf([
+            'EM_ATENDIMENTO',
+            'CONTRATADO',
+            'DESISTENTE'
+        ])
+          });      
+          if (!(await modelo.isValid(req.body))){
+            return res.status(400).json({ Mensagem: 'Falta de dados', id:'id_cliente', status: 'status_novo'})
+          }
+        const dados = Object.assign({}, req.body);
+        dados.consultor_id = req.consultorID;
+        const cliente = await Clientes.findByPk(dados.id);
+        if(cliente){
+            const novo_status = await cliente.update(dados);
+            return res.status(200).json({Atualizado: cliente});
+        }
+        return res.status(400).json({
+            error: 'id invalido'});
     }
 }
 
