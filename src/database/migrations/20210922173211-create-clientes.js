@@ -20,27 +20,27 @@ module.exports = {
       },
       cep:{
         type:  Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       logradouro:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       numero:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       bairro:{
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull:true
       },
       cidade:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       uf:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       email: {
         type: Sequelize.STRING,
@@ -90,7 +90,6 @@ module.exports = {
 
     })
   },
-//criar o relacionamento
   down: queryInterface => {
     return queryInterface.dropTable('clientes')
   }

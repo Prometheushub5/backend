@@ -7,7 +7,7 @@ Atualizar controleCliente com YUP#FEITO
 listar clientes por data de criação#FEITO
 Não poderá existir um NOVO contato com mesmo CPF 
 (UPDATE NA TABELA, UPDATE NA MODEL, TRATAR ERRO SE NÃO FOR UNICO NO CONTROLER)#OK
-O campos: CPF, Nome, Telefone, Whatsapp e Email são obrigatórios: 
+O campos: CPF, Nome, Telefone, Whatsapp e Email são obrigatórios: #FEITO
 (OS OUTROS ITENS NÃO SÃO OBRIGATÓRIOS, CORRIGIR TABELA MODEL E CONTROLLER)
 {
     TABELA{

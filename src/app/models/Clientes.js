@@ -4,92 +4,89 @@ class Clientes extends Model {
     static init(sequelize) {
       super.init({
         id: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            autoIncrement: true,
-            primaryKey: true,
-          },
-          nome: {
-            type: Sequelize.STRING,
-            allowNull: false,
-          },
-          cpf:{
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true
-          },
-          cep:{
-            type:  Sequelize.STRING,
-            allowNull: false
-          },
-          logradouro:{
-            type: Sequelize.STRING,
-            allowNull: false
-          },
-          numero:{
-            type: Sequelize.STRING,
-            allowNull: false
-          },
-          bairro:{
-            type: Sequelize.STRING,
-            allowNull:false
-          },
-          cidade:{
-            type: Sequelize.STRING,
-            allowNull: false
-          },
-          uf:{
-            type: Sequelize.STRING,
-            allowNull: false
-          },
-          email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true,
-          },
-          telefone:{
-            type: Sequelize.STRING,
-            allowNull:false
-          },
-          whats:{
-            type: Sequelize.STRING,
-            allowNull: false
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
         },
-          curso_id: {
-            type: Sequelize.INTEGER,
-            references: { model: 'cursos', key: 'id' },
-            onUpdate: 'CASCADE',
-            onDelete: 'SET NULL',
-            allowNull: true,
+        nome: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
-          consultor_id: {
-            type: Sequelize.INTEGER,
-            references: { model: 'consultores', key: 'id' },
-            onUpdate: 'CASCADE',
-            onDelete: 'SET NULL',
-            allowNull: true,
+        cpf:{
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true
         },
-          status:{
-            type: Sequelize.ENUM,
-            values:[
-              'NOVO',
-              'EM_ATENDIMENTO',
-              'CONTRATADO',
-              'DESISTENTE'
-            ],
-            defaultValue: 'NOVO',
-            allowNull:false
+        cep:{
+          type:  Sequelize.STRING,
+          allowNull: true
         },
-          created_at: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-          },
-          updated_at: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-          }
+        logradouro:{
+          type: Sequelize.STRING,
+          allowNull: true
+        },
+        numero:{
+          type: Sequelize.STRING,
+          allowNull: true
+        },
+        bairro:{
+          type: Sequelize.STRING,
+          allowNull:true
+        },
+        cidade:{
+          type: Sequelize.STRING,
+          allowNull: true
+        },
+        uf:{
+          type: Sequelize.STRING,
+          allowNull: true
+        },
+        email: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        telefone:{
+          type: Sequelize.STRING,
+          allowNull:false
+        },
+        whats:{
+          type: Sequelize.STRING,
+          allowNull: false
+      },
+        curso_id: {
+          type: Sequelize.INTEGER,
+          references: { model: 'cursos', key: 'id' },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
+          allowNull: true,
+      },
+        consultor_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'consultores', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
+    },
+        status:{
+          type: Sequelize.ENUM,
+          values:[
+            'NOVO',
+            'EM_ATENDIMENTO',
+            'CONTRATADO',
+            'DESISTENTE'
+          ],
+          allowNull:false
+      },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        }
         },
         {
           sequelize,
