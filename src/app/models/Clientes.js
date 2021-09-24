@@ -16,6 +16,7 @@ class Clientes extends Model {
           cpf:{
             type: Sequelize.STRING,
             allowNull: false,
+            unique: true
           },
           cep:{
             type:  Sequelize.STRING,

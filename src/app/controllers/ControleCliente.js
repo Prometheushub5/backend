@@ -5,6 +5,24 @@ import Consultores from '../models/Consultores';
 
 class ControleCliente{
     async criar(req,res){
+        const modelo = Yup.object().shape({
+            nome: Yup.string().required(),
+            cpf: Yup.number().required(),
+            cep: Yup.string(),
+            logradouro: Yup.string(),
+            numero: Yup.string(),
+            bairro: Yup.string(),
+            cidade: Yup.string(),
+            uf: Yup.string(),
+            email: Yup.email().required(),
+            telefone: Yup.number().required(),
+            whats:Yup.number().required(),
+            curso_id: Yup.number().required()
+        });      
+          if (!(await modelo.isValid(req.body))){
+            return res.status(400).json({ 
+                Mensagem: 'Falta de dados'})
+          }
         const ExisteCliente = await Clientes.findOne({
             where: {
                 [Op.or]: [

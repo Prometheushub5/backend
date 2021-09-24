@@ -1,7 +1,38 @@
-Falta criar rotas de:
 Update cursos #FEITO
 Update de senha #FEITO
 update de status de cliente (novo, em atendimento)#FEITO
 Criar relacionamento de consultor para cliente (1 consultor para muitos clientes)#FEITO
 Criar coluna na tabela clientes para receber consultor(atendente);#FEITO
-Atualizar controleCliente com YUP
+Atualizar controleCliente com YUP#FEITO
+listar clientes por data de criação#FEITO
+Não poderá existir um NOVO contato com mesmo CPF 
+(UPDATE NA TABELA, UPDATE NA MODEL, TRATAR ERRO SE NÃO FOR UNICO NO CONTROLER)#OK
+O campos: CPF, Nome, Telefone, Whatsapp e Email são obrigatórios: 
+(OS OUTROS ITENS NÃO SÃO OBRIGATÓRIOS, CORRIGIR TABELA MODEL E CONTROLLER)
+{
+    TABELA{
+        CPF:OK
+        NOME:OK
+        TELEFONE:OK,
+        WHATS:OK,
+        EMAIL:OK
+    }
+    MODEL{
+        CPF:OK
+        NOME:OK
+        TELEFONE:OK,
+        WHATS:OK,
+        EMAIL:OK
+    }
+    CONTROLER{
+        CPF:OK
+        NOME:OK
+        TELEFONE:OK,
+        WHATS:OK,
+        EMAIL:OK
+    }
+}
+
+No preenchimento do formulário, também será obrigatório informar o curso de preferência 
+(TABELA ESTÁ OK(PODE SER NULO), O TRATAMENTO TERA QUE SER FEITO NA CONTROLLER DE CLIENTES)#FEITO.
+Cada novo contato será criado com status = NOVO (ver requisito Plus+)#FEITO
