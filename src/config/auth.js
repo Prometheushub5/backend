@@ -1,5 +1,5 @@
 require ('dotenv/config')
 export default {
-  secret:AUTH_SECRET,
-  expiresIn:AUTH_EXPIRE
+  secret:process.env.AUTH_SECRET,
+  expiresIn:process.env.AUTH_EXPIRE
 }
