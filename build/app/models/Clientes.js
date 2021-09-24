@@ -77,16 +77,19 @@ class Clientes extends _sequelize.Model {
             'CONTRATADO',
             'DESISTENTE'
           ],
-          allowNull:false
+          allowNull:false,
+          defaultValue: 'NOVO'
       },
-        created_at: {
-          type: _sequelize2.default.DATE,
-          allowNull: false,
-        },
-        updated_at: {
-          type: _sequelize2.default.DATE,
-          allowNull: false,
-        }
+      created_at: {
+        type: _sequelize2.default.DATE,
+        allowNull: false,
+        defaultValue: _sequelize2.default.DATE
+      },
+      updated_at: {
+        type: _sequelize2.default.DATE,
+        allowNull: false,
+        defaultValue: _sequelize2.default.DATE
+      }
         },
         {
           sequelize,

@@ -14,7 +14,7 @@ class ControleCliente{
             bairro: Yup.string(),
             cidade: Yup.string(),
             uf: Yup.string(),
-            email: Yup.email().required(),
+            email: Yup.string().email().required(),
             telefone: Yup.number().required(),
             whats:Yup.number().required(),
             curso_id: Yup.number().required()
