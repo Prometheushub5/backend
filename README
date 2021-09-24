@@ -32,7 +32,6 @@ O campos: CPF, Nome, Telefone, Whatsapp e Email são obrigatórios: #FEITO
         EMAIL:OK
     }
 }
-
 No preenchimento do formulário, também será obrigatório informar o curso de preferência 
 (TABELA ESTÁ OK(PODE SER NULO), O TRATAMENTO TERA QUE SER FEITO NA CONTROLLER DE CLIENTES)#FEITO.
 Cada novo contato será criado com status = NOVO (ver requisito Plus+)#FEITO
