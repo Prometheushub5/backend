@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server",
-    "start": "nodemon src/server"
+    "start": "node build/server.js",
+    "build": "sucrase ./src -d ./build --transforms imports"
   },
   "keywords": [],
   "author": "Fabio Tozoni",
