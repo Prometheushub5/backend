@@ -9,7 +9,7 @@ import swaggerDocument from '../swagger.json';
 
 const rotas = new Router();
 
-rotas.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+rotas.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 rotas.post('/v1.0/clientes',ControleCliente.criar); //criar clientes
 rotas.get('/v1.0/cursos',ControleCurso.listar); //listar cursos
