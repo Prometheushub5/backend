@@ -39,7 +39,7 @@ class ControleCurso{
         return res.json(curso);
     }
     async listar(req, res) {
-      const {id} = req.query
+      const {id} = req.params
       if(id){ 
           const curso = await Cursos.findOne({
           where: {id:id}
@@ -72,7 +72,6 @@ class ControleCurso{
    }
    async update(req, res) {
     const modelo = Yup.object().shape({
-      id: Yup.number().required(),
       nome: Yup.string(),
       nivel_ensino:Yup.string().oneOf([
           'LATO SENSU',
@@ -102,8 +101,8 @@ class ControleCurso{
     if (!(await modelo.isValid(req.body))){
       return res.status(400).json({ Mensagem: 'Entrada não permitida'})
     }
-
-    const curso = await Cursos.findByPk(req.body.id);
+    const {id} = req.params
+    const curso = await Cursos.findByPk(id);
 
     if (curso){
       const atualizacao = Object.assign({}, req.body);
