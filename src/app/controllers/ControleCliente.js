@@ -21,7 +21,7 @@ class ControleCliente{
         });      
           if (!(await modelo.isValid(req.body))){
             return res.status(400).json({ 
-                Mensagem: 'Falta de dados'})
+                Mensagem:"Solicitação inválida."})
           }
         const ExisteCliente = await Clientes.findOne({
             where: {
@@ -31,26 +31,15 @@ class ControleCliente{
                   ]}
         })
         if (ExisteCliente){
-            return res.status(400).json({
-                error: 'Cliente já cadastrado'
+            return res.status(422).json({
+                Mensagem: 'Cliente já cadastrado'
             })
         }
         const cliente = await Clientes.create(req.body);
-        return res.json(cliente);
+        return res.status(200).json(cliente);
     }
-
     async listar(req, res){
-        const {id, status, page = 1} = req.query
-        const valores=[            
-            'NOVO',
-            'EM_ATENDIMENTO',
-            'CONTRATADO',
-            'DESISTENTE'
-          ];
-          if (id && status){
-            return res.status(400).json({
-                erro: 'Id não pode ser ususado em conjunto com status'});
-          };
+        const {id} = req.params
         if(id){ 
             const cliente = await Clientes.findOne({
             where: {id:id}
@@ -59,36 +48,43 @@ class ControleCliente{
             return res.status(200).json({cliente: cliente});
         }
         return res.status(400).json({
-            error: 'id invalido'});
+            Mensagem:"Solicitação inválida."});
     }
+    const modelo = Yup.object().shape({
+        limit: Yup.number().max(100),
+        status: Yup.string().oneOf([
+            'NOVO',
+            'EM_ATENDIMENTO',
+            'CONTRATADO',
+            'DESISTENTE'
+        ]),
+        page: Yup.number()
+      })
+      if (!(await modelo.isValid(req.query))){
+        return res.status(400).json({Mensagem:"Solicitação inválida."})
+      }
+        const { limit = 3, page = 1, status} = req.query;
         if(status){
-            if(valores.indexOf(status) > -1){
                 const clientes = await Clientes.findAll({
                     where: {status: status},
                     order : ['updated_at'],
                     attributes: ['id','nome',['updated_at', 'atualizado']],
-                    limit: 3,
-                    offset: (page -1) * 3
+                    limit: limit,
+                    offset: (page -1) * limit
                 })
                 return res.status(200).json({status : status, pagina: page, clientes: clientes})
-                
-            }
-            return res.status(400).json({
-                    error: 'status invalido'});
         }
-
         const clientes = await Clientes.findAll({
             order : ['updated_at'],
             attributes: ['id','nome','status'],
-            limit: 3,
-            offset: (page -1) * 3,
+            limit: limit,
+            offset: (page -1) * limit,
 
         });
         return res.status(200).json({pagina: page, clientes: clientes});
     }
     async atendimento(req, res){
         const modelo = Yup.object().shape({
-            id: Yup.number().required(),
             status: Yup.string().required().oneOf([
             'EM_ATENDIMENTO',
             'CONTRATADO',
@@ -96,19 +92,29 @@ class ControleCliente{
         ])
           });      
           if (!(await modelo.isValid(req.body))){
-            return res.status(400).json({ Mensagem: 'Falta de dados', id:'id_cliente', status: 'status_novo'})
+            return res.status(400).json({Mensagem:"Solicitação inválida."})
           }
         const dados = Object.assign({}, req.body);
+        const {id} = req.params
         dados.consultor_id = req.consultorID;
         const consultor = await Consultores.findByPk(req.consultorID);
-        const cliente = await Clientes.findByPk(dados.id);
+        const cliente = await Clientes.findByPk(id);
         if(cliente){
             const novo_status = await cliente.update(dados);
             return res.status(200).json({nome:cliente.nome, id: cliente.id, consultor: consultor.nome, status:cliente.status});
         }
         return res.status(400).json({
-            error: 'id invalido'});
+            Mensagem:"Solicitação inválida."});
     }
+    async delete(req, res){
+        const {id} = req.params
+        const cliente = await Clientes.findByPk(id);   
+        if (cliente){
+          const del = await curso.destroy(cliente);
+            return res.status(200).json({Mensagem: 'Curso excluido'})
+          }
+          return res.status(404).json({ Mensagem: 'ID não existe'})
+        }
 }
 
 export default new ControleCliente();
