@@ -6,18 +6,18 @@ import Consultores from '../models/Consultores';
 class ControleCliente{
     async criar(req,res){
         const modelo = Yup.object().shape({
-            nome: Yup.string().required(),
-            cpf: Yup.number().required(),
+            nome: Yup.string().require(),
+            cpf: Yup.number().require(),
             cep: Yup.string(),
             logradouro: Yup.string(),
             numero: Yup.string(),
             bairro: Yup.string(),
             cidade: Yup.string(),
             uf: Yup.string(),
-            email: Yup.string().email().required(),
-            telefone: Yup.number().required(),
-            whats:Yup.number().required(),
-            curso_id: Yup.number().required()
+            email: Yup.string().email().require(),
+            telefone: Yup.number().require(),
+            whats:Yup.number().require(),
+            curso_id: Yup.number().require()
         });      
           if (!(await modelo.isValid(req.body))){
             return res.status(400).json({ 
@@ -85,7 +85,7 @@ class ControleCliente{
     }
     async atendimento(req, res){
         const modelo = Yup.object().shape({
-            status: Yup.string().required().oneOf([
+            status: Yup.string().require().oneOf([
             'EM_ATENDIMENTO',
             'CONTRATADO',
             'DESISTENTE'
