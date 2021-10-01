@@ -2,6 +2,8 @@ openapi: "3.0.0"
 info:
   version: 1.0.0
   title: Prometheus-API
+  description: Esta documentação tem por finalidade auxiliar a integração entre APIs e facilitar a usabilidade da plataforma Prometheus.
+  
   license:
     name: MIT
 servers:

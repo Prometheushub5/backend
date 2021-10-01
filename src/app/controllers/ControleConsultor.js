@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 class ControleConsultor{
     async criar(req,res){
       const modelo = Yup.object().shape({
-        nome: Yup.string.require(),
+        nome: Yup.string().require(),
         email: Yup.string().email().require(),
         whats: Yup.string().require(),
         senha: Yup.string().require()
