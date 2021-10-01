@@ -4,10 +4,10 @@ import * as Yup from 'yup';
 class ControleConsultor{
     async criar(req,res){
       const modelo = Yup.object().shape({
-        nome: Yup.string().require(),
-        email: Yup.string().email().require(),
-        whats: Yup.string().require(),
-        senha: Yup.string().require()
+        nome: Yup.string().required(),
+        email: Yup.string().email().required(),
+        whats: Yup.string().required(),
+        senha: Yup.string().required()
       })
       if (!(await modelo.isValid(req.body))){
         return res.status(400).json({Mensagem:"Solicitação inválida."})
@@ -28,10 +28,10 @@ class ControleConsultor{
           email: Yup.string().email(),
           senhaAntiga: Yup.string(),
           senha: Yup.string().when(
-            'senhaAntiga', (senhaAntiga, entrada) => senhaAntiga ? entrada.require() : entrada
+            'senhaAntiga', (senhaAntiga, entrada) => senhaAntiga ? entrada.required() : entrada
           ),
           senhaConfirma: Yup.string().when(
-            'senha', (senha, entrada) => senha ? entrada.require().oneOf([Yup.ref('senha')]) : entrada)
+            'senha', (senha, entrada) => senha ? entrada.required().oneOf([Yup.ref('senha')]) : entrada)
         });
     
         if (!(await modelo.isValid(req.body))){

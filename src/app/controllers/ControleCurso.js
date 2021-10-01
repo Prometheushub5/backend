@@ -5,8 +5,8 @@ import * as Yup from 'yup';
 class ControleCurso{
     async criar(req,res){
       const modelo = Yup.object().shape({
-        nome: Yup.string().require(),
-        nivel_ensino:Yup.string().require().oneOf([
+        nome: Yup.string().required(),
+        nivel_ensino:Yup.string().required().oneOf([
             'LATO SENSU',
             'FORMAÇÃO COMPLEMENTAR',
             'GRADUAÇÃO',
@@ -19,17 +19,17 @@ class ControleCurso{
             'MÉDIO',
             'INFANTIL'
             ]),
-        grau_academico:Yup.string().require().oneOf([
+        grau_academico:Yup.string().required().oneOf([
             'BACHARELADO',
             'LICENCIATURA',
             'TECNOLÓGICO'
           ]),
-        modalidade:Yup.string().require().oneOf([
+        modalidade:Yup.string().required().oneOf([
             'PRESENCIAL',
             'SEMI-PRESENCIAL',
             'REMOTO'
-          ]).require(),
-        unidade: Yup.string().require()
+          ]).required(),
+        unidade: Yup.string().required()
         });
         if (!(await modelo.isValid(req.body))){
           return res.status(400).json({Mensagem:"Solicitação inválida."})
