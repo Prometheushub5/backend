@@ -11,7 +11,7 @@ servers:
 paths:
   /auth:
     post:
-      summary: Faz login e recebe o tokens
+      summary: Faz login e recebe o token
       tags:
         - Autorização
       requestBody:
