@@ -1,34 +1,52 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Prometheus-API
-  description: Esta documentação tem por finalidade auxiliar a integração entre APIs e facilitar a usabilidade da plataforma Prometheus.
-  
+  title: Documentação API Prometheus
+  description: "Esta documentação tem por finalidade auxiliar a integração entre APIs e facilitar a usabilidade da plataforma Prometheus. 
+  <h1>Recursos disponíveis</h1>
+  <p>Atualmente existem os seguintes recursos abaixo que você pode manipular através dos métodos <b>GET, POST, PUT </b>e<b> DELETE</b>.</p>
+  <ul><li>Autenticação</li><li>Cursos</li><li>Clientes</li><li>Consultores</li></ul>.
+  <h1>Tratamento de dados</h1>
+  <p>Todos os dados enviados e recebidos pela API estão/deverão ser em formato JSON (application/json).</p>
+  <h1>Endpoint</h1>
+  <p>O endpoint de conexão com a API REST JSON da Prometeus é <code><span>https://prometheusapi.herokuapp.com/v1.0/</span></code></p>"
+  contact:
+    name: Developers
+    email: fabiotozoni@gmail.com
+    url: https://github.com/Prometheushub5/backend
   license:
-    name: MIT
+    name: License
+    url: https://github.com/Prometheushub5/backend
 servers:
-  - url: https://prometheusapi.herokuapp.com/v1.0
+  - url: https://prometheusapi.herokuapp.com/v1.0/
+    description: Production
+  - url:  https://qa-prometheusapi.herokuapp.com/
+    description: Testing
+  - url: https://dev-prometheusapi.herokuapp.com/
+    description: Development
 paths:
   /auth:
     post:
-      summary: Faz login e recebe o token
+      summary: Rota para autenticação de consultores
+      description: "Para usar a API Prometheus para ler e gravar recursos em nome de um usuário (consultor), você deve obter um token de acesso da plataforma de identidade e anexá-lo às solicitações que ele envia para a API. O fluxo de concessão de código de autorização é um fluxo comum usado por aplicativos nativos e móveis e também por alguns aplicativos Web.O resultado que você deverá enviar no HEADER de todas as requisições que requerem autenticação será semelhante a:<br/> <code>Authorization: Bearer d2JfdXN1YXJpbzp3Yl9zZW5oYQ</code>"
       tags:
         - Autorização
       requestBody:
         required: true
+        description: A autenticação é realizada pelo servidor. A solicitação devera conter no corpo um e-mail válido e senha.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/login'
       responses:
         '200':
-          description: Ok
+          description: Resposta em caso de sucesso.
           content:
             application/json:    
               schema:
                 $ref: "#/components/schemas/login_response"
         400:
-          description: Solicitação inválida.
+          description: Formato da solicitação incorreto.
           content:
             application/json:
               schema:
@@ -687,6 +705,7 @@ components:
         email:
           type: string
           default: email@servidor.com
+          description: E-mail cadastrado
         senha:
           type: string
           default: senha
@@ -698,14 +717,23 @@ components:
           properties:
             id:
               type: number
+              description: id única
             nome:
               type: string
+              description: Nome do consultor
+              default: Nome
             email:
               type: string
+              default: email@servidor.com
+              description: e-mail do consultor
             whats:
               type: string
+              default: 11999999999
+              description: WhatsApp do consultor
         token:
           type: string
+          description: Token de acesso
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6Ik1BU1RFUiIsImVtYWlsIjoiZmFiaW90b3pvbmlAZ21haWwuY29tIiwiaWF0IjoxNjMzMzEwMDUzLCJleHAiOjE2MzM0ODI4NTN9.AeEgso92
   securitySchemes:
     BearerAuth:
       type: http
