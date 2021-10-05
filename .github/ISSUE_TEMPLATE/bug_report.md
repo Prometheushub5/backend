@@ -1,7 +1,7 @@
 ---
-Nome: Bug report
+name: Bug report
 about: Crie um report e nos ajude a melhorar
-Titulo: ''
+title: ''
 labels: ''
 assignees: ''
 
