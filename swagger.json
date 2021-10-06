@@ -73,7 +73,8 @@
     },
     "/cursos": {
       "get": {
-        "summary": "Lista os cursos",
+        "summary": "Listar todos cursos cadastrados",
+        "description": "Lista todos os cursos cadastrados. Pode utilizar <i>querystring</i> para controlar os resultados.</br> Caso os parâmetros sejam omitidos, retorna primeira página com três resultados.",
         "tags": [
           "Cursos"
         ],
@@ -81,24 +82,19 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "Quantidade de itens.",
+            "description": "Quantidade de itens apresentados na resposta. <b>Max = 100 Min = 1 Default = 3.</b>",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 3,
-              "minimum": 1,
-              "maximum": 100
+              "type": "integer"
             }
           },
           {
             "name": "page",
             "in": "query",
-            "description": "Retorna uma pagina especifica da lista de cursos, caso seja omitido retorna a primeira página.",
+            "description": "Retorna uma pagina especifica da lista de cursos, caso seja omitido retorna a primeira página. <b> Min = 1</b>",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 1,
-              "minimum": 1
+              "type": "integer"
             }
           }
         ],
@@ -126,10 +122,11 @@
         }
       },
       "post": {
-        "summary": "Cria um novo curso",
+        "summary": "Criar um novo curso",
         "tags": [
           "Cursos"
         ],
+        "description": "Endpoint para criação de novos cursos. A requisição deverá seguir o <i>Schema</i>.</br><b>Necessário autenticação</b>.",
         "requestBody": {
           "required": true,
           "content": {
@@ -171,7 +168,8 @@
     },
     "/cursos/{id}": {
       "get": {
-        "summary": "Informação de um curso específico",
+        "summary": "Informações de um curso específico",
+        "description": "Para listar um curso você precisa informar na URL do endpoint um {<b>id</b>} de curso válido.",
         "tags": [
           "Cursos"
         ],
@@ -180,7 +178,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "id do curso",
+            "description": "id de curso",
             "schema": {
               "type": "number"
             }
@@ -214,6 +212,7 @@
           "Cursos"
         ],
         "summary": "Atualiza dados de um curso existente",
+        "description": "Atualiza dados de um curso já cadastrado.Para alterar um curso você precisa informar na URL do endpoint um {<b>id</b>} de curso válido.</br><b>Necessário autenticação</b>.",
         "parameters": [
           {
             "name": "id",
@@ -267,7 +266,8 @@
         "tags": [
           "Cursos"
         ],
-        "summary": "Exclui um curso específico",
+        "summary": "Exclui um curso cadastrado",
+        "description": "Exclui um curso previamente cadastrado. Atenção todos os clientes com interesse no curso excluido ficaram com <i>curso_id</i> em vazio.</br>Para excluir um curso você precisa informar na URL do endpoint um {<b>id</b>} de curso válido.</br><b>Necessário autenticação</b>.",
         "parameters": [
           {
             "name": "id",
@@ -310,7 +310,8 @@
     },
     "/clientes": {
       "post": {
-        "summary": "Cria um cliente",
+        "summary": "Criar um cliente",
+        "description": "Endpoint para criação de novos clientes. A requisição deverá seguir o <i>Schema</i>.",
         "tags": [
           "Clientes"
         ],
@@ -358,7 +359,8 @@
         }
       },
       "get": {
-        "summary": "Lista os clientes",
+        "summary": "Listar os clientes",
+        "description": "Lista todos os clientes cadastrados. Pode utilizar <i>querystring</i> para controlar os resultados.</br> Caso os parâmetros sejam omitidos, retorna primeira página com três resultados, independente do status.</br><b>Necessário autenticação</b>.",
         "tags": [
           "Clientes"
         ],
@@ -366,21 +368,19 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "Quantidade de itens (max 100).",
+            "description": "Quantidade de itens apresentados na resposta. <b>Max = 100 Min = 1 Default = 3.</b>",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 3
+              "type": "integer"
             }
           },
           {
             "name": "page",
             "in": "query",
-            "description": "Retorna uma pagina especifica da lista, caso seja omitido retorna a primeira página.",
+            "description": "Retorna uma pagina especifica da lista de cursos, caso seja omitido retorna a primeira página. <b> Min = 1</b>",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 1
+              "type": "integer"
             }
           },
           {
@@ -390,19 +390,25 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "NOVO",
               "enum": [
-                "NOVO",
+                "<b>NOVO",
                 "EM_ATENDIMENTO",
                 "CONTRATADO",
-                "DESISTENTE"
+                "DESISTENTE</b>"
               ]
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lista_cliente"
+                }
+              }
+            }
           },
           "400": {
             "description": "Solicitação inválida.",
@@ -425,6 +431,7 @@
     "/clientes/{id}": {
       "get": {
         "summary": "Informação de um cliente específico",
+        "description": "Para visualizar um cliente você precisa informar na URL do endpoint um {<b>id</b>} de cliente válido.</br><b>Necessário autenticação.</b>",
         "tags": [
           "Clientes"
         ],
@@ -433,7 +440,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "id do cliente que deseja retornar",
+            "description": "id do cliente",
             "schema": {
               "type": "number"
             }
@@ -472,6 +479,7 @@
           "Clientes"
         ],
         "summary": "Atualiza o status de um cliente existente",
+        "description": "Atualiza o status de um cliente cadastrado.Para alterar o status um cliente você precisa informar na URL do endpoint um {<b>id</b>} de cliente válido. No corpo da requisição devera conter o novo status, conforme <i>Schema</i>.</br><b>Necessário autenticação</b>.",
         "parameters": [
           {
             "name": "id",
@@ -526,6 +534,7 @@
           "Clientes"
         ],
         "summary": "Exclui um cliente",
+        "description": "Exclui um cliente previamente cadastrado. </br>Atenção, esta ação não pode ser desfeita!.</br>Para excluir um cliente você precisa informar na URL do endpoint um {<b>id</b>} de cliente válido.</br><b>Necessário autenticação</b>.",
         "parameters": [
           {
             "name": "id",
@@ -568,7 +577,8 @@
     },
     "/consultores": {
       "post": {
-        "summary": "Cria um consultor",
+        "summary": "Criar consultor",
+        "description": "Endpoint para criação de novos consultores. A requisição deverá seguir o <i>Schema</i>.</br><b>Necessário autenticação</b>.",
         "tags": [
           "Consultores"
         ],
@@ -625,6 +635,7 @@
           "Consultores"
         ],
         "summary": "Atualiza dados do consultor logado",
+        "description": "Atualiza dados do consultor logado. No corpo da requisição devera conter os novos dados, conforme <i>Schema</i>.</br>Em caso de troca de senha, os campos <i> senhaAntiga, senha e senhaConfirma</i> são <b>obrigatórios!</b></br><b>Necessário autenticação</b>.",
         "requestBody": {
           "required": true,
           "content": {
@@ -670,6 +681,7 @@
           "Consultores"
         ],
         "summary": "Exclui um consultor",
+        "description": "Exclui um consultor previamente cadastrado. </br>Atenção, esta ação não pode ser desfeita!.</br>Para excluir um consultor você precisa informar na URL do endpoint um {<b>id</b>} de consultor válido.</br><b>Necessário autenticação</b>.",
         "parameters": [
           {
             "name": "id",
@@ -718,7 +730,7 @@
         "properties": {
           "Mensagem": {
             "type": "string",
-            "default": "Solicitação inválida."
+            "example": "Solicitação inválida."
           }
         }
       },
@@ -727,7 +739,7 @@
         "properties": {
           "Mensagem": {
             "type": "string",
-            "default": "Já cadastrado."
+            "example": "Já cadastrado."
           }
         }
       },
@@ -736,19 +748,37 @@
         "properties": {
           "pagina": {
             "type": "number",
-            "default": 1
+            "example": 1
           },
           "cursos": {
             "type": "object",
             "properties": {
               "id": {
-                "type": "number"
+                "type": "number",
+                "description": "id do curso",
+                "example": 1
               },
               "nome": {
-                "type": "string"
+                "type": "string",
+                "description": "Nome do curso",
+                "example": "Nome"
               },
               "nivel_ensino": {
-                "type": "string"
+                "type": "string",
+                "example": "GRADUAÇÃO",
+                "enum": [
+                  "LATO SENSU",
+                  "FORMAÇÃO COMPLEMENTAR",
+                  "GRADUAÇÃO",
+                  "DOUTORADO",
+                  "TÉCNICO",
+                  "RESIDÊNCIA",
+                  "MESTRADO",
+                  "FUNDAMENTAL",
+                  "TÉCNICO INTEGRADO",
+                  "MÉDIO",
+                  "INFANTIL"
+                ]
               }
             }
           }
@@ -758,27 +788,67 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number"
+            "type": "number",
+            "description": "id do curso",
+            "example": 1
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "description": "Nome do curso",
+            "example": "Nome"
           },
           "nivel_ensino": {
-            "type": "string"
+            "type": "string",
+            "example": "GRADUAÇÃO",
+            "enum": [
+              "LATO SENSU",
+              "FORMAÇÃO COMPLEMENTAR",
+              "GRADUAÇÃO",
+              "DOUTORADO",
+              "TÉCNICO",
+              "RESIDÊNCIA",
+              "MESTRADO",
+              "FUNDAMENTAL",
+              "TÉCNICO INTEGRADO",
+              "MÉDIO",
+              "INFANTIL"
+            ]
           },
           "grau_academico": {
-            "type": "string"
+            "type": "string",
+            "example": "BACHARELADO",
+            "enum": [
+              "BACHARELADO",
+              "LICENCIATURA",
+              "TECNOLÓGICO"
+            ]
           },
           "modalidade": {
+            "example": "PRESENCIAL",
+            "type": "string",
+            "enum": [
+              "PRESENCIAL",
+              "SEMI-PRESENCIAL",
+              "REMOTO"
+            ]
+          },
+          "unidade": {
+            "example": "Unidade 1",
             "type": "string"
           },
           "consultor_id": {
+            "description": "id do consultor que criou/ou modificou o curso",
+            "example": 1,
             "type": "string"
           },
           "created_at": {
+            "description": "TimeStamp de criação do curso",
+            "example": "2021-10-01T19:33:55.876Z",
             "type": "string"
           },
           "updated_at": {
+            "description": "TimeStamp de modificação do curso",
+            "example": "2021-10-01T19:33:55.876Z",
             "type": "string"
           }
         }
@@ -794,7 +864,9 @@
         ],
         "properties": {
           "nome": {
-            "type": "string"
+            "type": "string",
+            "description": "Nome do novo curso",
+            "example": "Nome"
           },
           "nivel_ensino": {
             "type": "string",
@@ -829,7 +901,8 @@
             ]
           },
           "unidade": {
-            "type": "string"
+            "type": "string",
+            "example": "Unidade"
           }
         }
       },
@@ -881,7 +954,7 @@
         "properties": {
           "Mensagem": {
             "type": "string",
-            "default": "Excluido!"
+            "example": "Excluido!"
           }
         }
       },
@@ -897,40 +970,53 @@
         ],
         "properties": {
           "nome": {
-            "type": "string"
+            "type": "string",
+            "example": "Jackie Chan"
           },
           "cpf": {
-            "type": "string"
+            "type": "string",
+            "example": "999.999.999-99"
           },
           "cep": {
-            "type": "string"
+            "type": "string",
+            "example": "00000-000"
           },
           "logradouro": {
+            "example": "Rua dos bobos",
             "type": "string"
           },
           "numero": {
-            "type": "string"
+            "type": "string",
+            "example": 0
           },
           "bairro": {
-            "type": "string"
+            "type": "string",
+            "example": "Onde Judas perdeu as Botas"
           },
           "cidade": {
-            "type": "string"
+            "type": "string",
+            "example": "Onde o vento faz a curva"
           },
           "uf": {
-            "type": "string"
+            "type": "string",
+            "example": "PR"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "example": "email@servidor.com"
           },
           "telefone": {
-            "type": "string"
+            "type": "string",
+            "example": "8650 4006"
           },
           "whats": {
-            "type": "string"
+            "type": "string",
+            "example": "8650 4006"
           },
           "curso_id": {
-            "type": "string"
+            "type": "string",
+            "example": 10,
+            "description": "Id do curso de interesse"
           }
         }
       },
@@ -938,58 +1024,115 @@
         "type": "object",
         "properties": {
           "nome": {
-            "type": "string"
+            "type": "string",
+            "example": "Jackie Chan"
           },
           "cpf": {
-            "type": "string"
+            "type": "string",
+            "example": "999.999.999-99"
           },
           "cep": {
-            "type": "string"
+            "type": "string",
+            "example": "00000-000"
           },
           "logradouro": {
+            "example": "Rua dos bobos",
             "type": "string"
           },
           "numero": {
-            "type": "string"
+            "type": "string",
+            "example": 0
           },
           "bairro": {
-            "type": "string"
+            "type": "string",
+            "example": "Onde Judas perdeu as Botas"
           },
           "cidade": {
-            "type": "string"
+            "type": "string",
+            "example": "Onde o vento faz a curva"
           },
           "uf": {
-            "type": "string"
+            "type": "string",
+            "example": "PR"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "example": "email@servidor.com"
           },
           "telefone": {
-            "type": "string"
+            "type": "string",
+            "example": "8650 4006"
           },
           "whats": {
-            "type": "string"
+            "type": "string",
+            "example": "8650 4006"
+          },
+          "curso_id": {
+            "type": "string",
+            "example": 10,
+            "description": "Id do curso de interesse"
           },
           "status": {
             "type": "string",
+            "example": "EM_ATENDIMENTO",
             "enum": [
-              "NOVO",
               "EM_ATENDIMENTO",
               "CONTRATADO",
               "DESISTENTE"
             ]
           },
-          "curso_id": {
-            "type": "string"
-          },
           "consultor_id": {
-            "type": "string"
+            "type": "string",
+            "example": null,
+            "description": "Id do consulto que atendeu o cliente"
           },
           "created_at": {
+            "description": "TimeStamp de criação do curso",
+            "example": "2021-10-01T19:33:55.876Z",
             "type": "string"
           },
           "updated_at": {
+            "description": "TimeStamp de modificação do curso",
+            "example": "2021-10-01T19:33:55.876Z",
             "type": "string"
+          }
+        }
+      },
+      "lista_cliente": {
+        "type": "object",
+        "properties": {
+          "pagina": {
+            "type": "string",
+            "example": 1
+          },
+          "clientes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "nome": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": [
+              {
+                "id": 1,
+                "nome": "João sem braço",
+                "status": "NOVO"
+              },
+              {
+                "id": 2,
+                "nome": "John Doe",
+                "status": "DESISTENTE"
+              }
+            ]
           }
         }
       },
@@ -1013,16 +1156,20 @@
         "type": "object",
         "properties": {
           "nome": {
-            "type": "string"
+            "type": "string",
+            "example": "Jhin"
           },
           "id": {
-            "type": "number"
+            "type": "number",
+            "example": 4
           },
           "consultor": {
-            "type": "string"
+            "type": "string",
+            "example": "Camille"
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "example": "NOVO"
           }
         }
       },
@@ -1036,16 +1183,20 @@
         ],
         "properties": {
           "nome": {
-            "type": "string"
+            "type": "string",
+            "example": "Yasuo"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "example": "Yasuo@ionia.com"
           },
           "whats": {
-            "type": "string"
+            "type": "string",
+            "example": 999999999
           },
           "senha": {
-            "type": "string"
+            "type": "string",
+            "example": "*******"
           }
         }
       },
@@ -1053,13 +1204,16 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "example": "0/10"
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "example": "Yasuo"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "example": "yasuo@ionia.com"
           }
         }
       },
@@ -1068,19 +1222,19 @@
         "properties": {
           "email": {
             "type": "string",
-            "default": "email@servidor.com"
+            "example": "email@servidor.com"
           },
           "senhaAntiga": {
             "type": "string",
-            "default": "senha_antiga"
+            "example": "senha_antiga"
           },
           "senha": {
             "type": "string",
-            "default": "senha_nova"
+            "example": "senha_nova"
           },
           "senhaConfirma": {
             "type": "string",
-            "default": "senha_nova"
+            "example": "senha_nova"
           }
         }
       },
@@ -1089,12 +1243,12 @@
         "properties": {
           "email": {
             "type": "string",
-            "default": "email@servidor.com",
+            "example": "email@servidor.com",
             "description": "E-mail cadastrado"
           },
           "senha": {
             "type": "string",
-            "default": "senha"
+            "example": "senha"
           }
         }
       },
@@ -1111,16 +1265,16 @@
               "nome": {
                 "type": "string",
                 "description": "Nome do consultor",
-                "default": "Nome"
+                "example": "Nome"
               },
               "email": {
                 "type": "string",
-                "default": "email@servidor.com",
+                "example": "email@servidor.com",
                 "description": "e-mail do consultor"
               },
               "whats": {
                 "type": "string",
-                "default": 11999999999,
+                "example": 11999999999,
                 "description": "WhatsApp do consultor"
               }
             }
@@ -1128,7 +1282,7 @@
           "token": {
             "type": "string",
             "description": "Token de acesso",
-            "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6Ik1BU1RFUiIsImVtYWlsIjoiZmFiaW90b3pvbmlAZ21haWwuY29tIiwiaWF0IjoxNjMzMzEwMDUzLCJleHAiOjE2MzM0ODI4NTN9.AeEgso92"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6Ik1BU1RFUiIsImVtYWlsIjoiZmFiaW90b3pvbmlAZ21haWwuY29tIiwiaWF0IjoxNjMzMzEwMDUzLCJleHAiOjE2MzM0ODI4NTN9.AeEgso92"
           }
         }
       }
