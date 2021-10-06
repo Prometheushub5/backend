@@ -54,7 +54,7 @@ paths:
   /cursos:
     get:
       summary: Listar todos cursos cadastrados
-      description: "Lista todos os cursos cadastrados. Pode utilizar <i>querystring</i> para controlar os resultados.</br> Caso os parametros sejam omitidos, apresenta a primeira página com três resultados."
+      description: "Lista todos os cursos cadastrados. Pode utilizar <i>querystring</i> para controlar os resultados.</br> Caso os parametros sejam omitidos, retorna primeira página com três resultados."
       tags:
         - Cursos
       parameters:
@@ -84,9 +84,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/400"    
     post:
-      summary: Cria um novo curso
+      summary: Criar um novo curso
       tags:
         - Cursos
+      description: "Endpoint para criação de novos cursos. A requisição deverá seguir o <i>Schema</i>.</br><b>Necessário autenticação</b>."
       requestBody:
         required: true
         content:
@@ -110,14 +111,15 @@ paths:
         - BearerAuth: []
   /cursos/{id}:
     get:
-      summary: Informação de um curso específico
+      summary: Informações de um curso específico
+      description: "Para listar um curso você precisa informar na URL do endpoint um {<b>id</b>} de curso válido."
       tags:
         - Cursos
       parameters:
         - name: id
           in: path
           required: true
-          description: id do curso
+          description: id de curso
           schema:
             type: number
       responses:
@@ -137,6 +139,7 @@ paths:
       tags:
       - "Cursos"
       summary: "Atualiza dados de um curso existente"
+      description: Atualiza dados de um curso já cadastrado.Para alterar um curso você precisa informar na URL do endpoint um {<b>id</b>} de curso válido.</br><b>Necessário autenticação</b>.
       parameters:
         - name: id
           in: path
@@ -168,7 +171,8 @@ paths:
     delete:
       tags:
       - "Cursos"
-      summary: "Exclui um curso específico"
+      summary: "Exclui um curso cadastrado"
+      description: "Exclui um curso previamente cadastrado. Atenção todos os clientes com interesse no curso excluido ficaram com <i>curso_id</i> em vazio.</br>Para excluir um curso você precisa informar na URL do endpoint um {<b>id</b>} de curso válido.</br><b>Necessário autenticação</b>."
       parameters:
         - name: id
           in: path
@@ -533,6 +537,8 @@ components:
           properties:
             nome:
               type: string
+              description: Nome do novo curso
+              default: Nome
             nivel_ensino:
               type: string
               enum:
@@ -561,6 +567,7 @@ components:
                 - "REMOTO"
             unidade:
               type: string
+              default: Unidade
     put_curso:
           type: object
           properties:
@@ -787,4 +794,3 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-   
