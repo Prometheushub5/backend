@@ -1,20 +1,20 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: Pedido de novo recurso
+about: Sugira uma idéia !
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**O recurso**
+Descrição clara e objetiva do que recurso que podemos implementar
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**Problema**
+O novo recurso pode resolver um problema ? Qual ?
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Existem alternativas?**
+Existem alternativas implementadas para esse recurso? Há outras formas de solucionar o problema ? Quais ?
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**Mais info**
+Caso julgue necessário utilize o campo a baixo para compartilhar mais informações.
