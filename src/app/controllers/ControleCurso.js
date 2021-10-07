@@ -19,7 +19,7 @@ class ControleCurso{
             'MÉDIO',
             'INFANTIL'
             ]),
-        grau_academico:Yup.string().required().oneOf([
+        grau_academico:Yup.string().oneOf([
             'BACHARELADO',
             'LICENCIATURA',
             'TECNOLÓGICO'
