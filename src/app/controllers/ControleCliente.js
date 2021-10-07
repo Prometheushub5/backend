@@ -7,7 +7,7 @@ class ControleCliente{
     async criar(req,res){
         const modelo = Yup.object().shape({
             nome: Yup.string().required(),
-            cpf: Yup.number().required(),
+            cpf: Yup.string().required(),
             cep: Yup.string(),
             logradouro: Yup.string(),
             numero: Yup.string(),
@@ -15,8 +15,8 @@ class ControleCliente{
             cidade: Yup.string(),
             uf: Yup.string(),
             email: Yup.string().email().required(),
-            telefone: Yup.number().required(),
-            whats:Yup.number().required(),
+            telefone: Yup.string().required(),
+            whats:Yup.string().required(),
             curso_id: Yup.number().required()
         });      
           if (!(await modelo.isValid(req.body))){
