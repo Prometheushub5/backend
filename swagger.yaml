@@ -20,9 +20,9 @@ info:
 servers:
   - url: https://prometheusapi.herokuapp.com/v1.0/
     description: Production
-  - url:  https://qa-prometheusapi.herokuapp.com/
+  - url:  https://qa-prometheusapi.herokuapp.com/v1.0/
     description: Testing
-  - url: https://dev-prometheusapi.herokuapp.com/
+  - url: https://dev-prometheusapi.herokuapp.com/v1.0/
     description: Development
 paths:
   /auth:
@@ -540,7 +540,6 @@ components:
           required:
             - nome
             - nivel_ensino
-            - grau_academico
             - modalidade
             - unidade
           properties:
