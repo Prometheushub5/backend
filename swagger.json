@@ -391,10 +391,10 @@
             "schema": {
               "type": "string",
               "enum": [
-                "<b>NOVO",
+                "NOVO",
                 "EM_ATENDIMENTO",
                 "CONTRATADO",
-                "DESISTENTE</b>"
+                "DESISTENTE"
               ]
             }
           }

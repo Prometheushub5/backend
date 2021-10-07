@@ -251,10 +251,10 @@ paths:
           schema:
             type: string
             enum:
-              - <b>NOVO
+              - NOVO
               - EM_ATENDIMENTO
               - CONTRATADO
-              - DESISTENTE</b>
+              - DESISTENTE
       responses:
         '200':
           description: Ok 
