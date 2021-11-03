@@ -52,7 +52,7 @@ class ControleCurso{
         Mensagem:"Solicitação inválida."});
     }
     const modelo = Yup.object().shape({
-      limit: Yup.number().max(100),
+      limit: Yup.number(),
       page: Yup.number()
     })
     if (!(await modelo.isValid(req.query))){
