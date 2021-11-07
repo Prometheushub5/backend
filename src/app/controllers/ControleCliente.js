@@ -63,12 +63,12 @@ class ControleCliente{
       if (!(await modelo.isValid(req.query))){
         return res.status(400).json({Mensagem:"Solicitação inválida."})
       }
-        const { limit = 3, page = 1, status} = req.query;
+        const { limit, page = 1, status} = req.query;
         if(status){
                 const clientes = await Clientes.findAll({
                     where: {status: status},
                     order : ['updated_at'],
-                    attributes: ['id','nome',['updated_at', 'atualizado']],
+                    attributes: ['id','nome','status',['updated_at', 'atualizado']],
                     limit: limit,
                     offset: (page -1) * limit
                 })
@@ -76,7 +76,7 @@ class ControleCliente{
         }
         const clientes = await Clientes.findAll({
             order : ['updated_at'],
-            attributes: ['id','nome','status'],
+            attributes: ['id','nome','status',['updated_at', 'atualizado']],
             limit: limit,
             offset: (page -1) * limit,
 
