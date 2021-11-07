@@ -66,7 +66,36 @@ class ControleConsultor{
             return res.status(200).json({Mensagem: 'Excluido!'})
           }
           return res.status(404).json({ Mensagem: 'ID não existe'})
-        }
+    }
+    async listar(req, res){
+      const {id} = req.params
+      if(id){ 
+          const consultor = await Consultores.findOne({
+          where: {id:id}
+      });
+      if(consultor){
+          return res.status(200).json({consultor: consultor});
+      }
+      return res.status(400).json({
+          Mensagem:"Solicitação inválida."});
+  }
+  const modelo = Yup.object().shape({
+      limit: Yup.number(),
+      page: Yup.number()
+    })
+    if (!(await modelo.isValid(req.query))){
+      return res.status(400).json({Mensagem:"Solicitação inválida."})
+    }
+      const { limit, page = 1,} = req.query;
+      const consultor = await Consultores.findAll({
+          order : ['updated_at'],
+          attributes: ['id','nome', 'email'],
+          limit: limit,
+          offset: (page -1) * limit,
+
+      });
+      return res.status(200).json({pagina: page, consultor: consultor});
+  }
 }
 
 export default new ControleConsultor();
