@@ -22,8 +22,8 @@ rotas.delete('/v1.0/cursos/:id',ControleCurso.delete);
 rotas.post('/v1.0/consultores', ControleConsultor.criar); //criar consultores
 rotas.put('/v1.0/consutores',ControleConsultor.update); ///update de senha e/ou email de consultor
 rotas.delete('/v1.0/consultores/:id',ControleConsultor.delete);
-rotas.get('v1.0/consultores',ControleConsultor.listar);
-rotas.get('v1.0/consultores/:id',ControleConsultor.listar)
+rotas.get('/v1.0/consultores',ControleConsultor.listar);
+rotas.get('/v1.0/consultores/:id',ControleConsultor.listar)
 rotas.get('/v1.0/clientes',ControleCliente.listar);
 rotas.get('/v1.0/clientes/:id',ControleCliente.listar);
 rotas.put('/v1.0/clientes/:id',ControleCliente.atendimento);
