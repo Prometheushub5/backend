@@ -673,9 +673,108 @@
             "BearerAuth": []
           }
         ]
+      },
+      "get": {
+        "summary": "Listar os consultores",
+        "description": "Lista todos os consultores cadastrados. Pode utilizar <i>querystring</i> para controlar os resultados.</br> Caso os parâmetros sejam omitidos, retorna primeira página com três resultados, independente do status.</br><b>Necessário autenticação</b>.",
+        "tags": [
+          "Consultores"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Quantidade de itens apresentados na resposta. <b>Max = 100 Min = 1 Default = 3.</b>",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Retorna uma pagina especifica da lista de cursos, caso seja omitido retorna a primeira página. <b> Min = 1</b>",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lista_cliente"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação inválida.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/400"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/consultores/{id}": {
+      "get": {
+        "summary": "Informação de um consultor específico",
+        "description": "Para visualizar um consultor você precisa informar na URL do endpoint um {<b>id</b>} de consultor válido.</br><b>Necessário autenticação.</b>",
+        "tags": [
+          "Consultores"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "id do consultor",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/consultor"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitação inválida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/400"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
       "delete": {
         "tags": [
           "Consultores"
