@@ -86,7 +86,7 @@ class ControleConsultor{
     if (!(await modelo.isValid(req.query))){
       return res.status(400).json({Mensagem:"Solicitação inválida."})
     }
-      const { limit, page = 1,} = req.query;
+      const { limit=1, page = 1,} = req.query;
       const consultor = await Consultores.findAll({
           order : ['updated_at'],
           attributes: ['id','nome', 'email'],

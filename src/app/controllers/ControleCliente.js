@@ -63,7 +63,7 @@ class ControleCliente{
       if (!(await modelo.isValid(req.query))){
         return res.status(400).json({Mensagem:"Solicitação inválida."})
       }
-        const { limit, page = 1, status} = req.query;
+        const { limit=1, page = 1, status} = req.query;
         if(status){
                 const clientes = await Clientes.findAll({
                     where: {status: status},
