@@ -51,7 +51,7 @@ class ControleCliente{
             Mensagem:"Solicitação inválida."});
     }
     const modelo = Yup.object().shape({
-        limit: Yup.number().max(100),
+        limit: Yup.number(),
         status: Yup.string().oneOf([
             'NOVO',
             'EM_ATENDIMENTO',
