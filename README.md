@@ -17,7 +17,7 @@ O **PROMETHEUS** é uma aplicação web desenvolvida para captação de leads. �
 **DEPLOY**
 
 #### Frontend
-Em breve
+https://desafio-final-prometheus.vercel.app/
 #### Backend
 https://prometheusapi.herokuapp.com/docs/
 
@@ -47,7 +47,7 @@ https://prometheusapi.herokuapp.com/docs/
 -  Postman
 ##  Hospedagem
 - Back-end: Heroku
-- Front-end: Netlify
+- Front-end: Vercel
 
 
 # Como executar o projeto
