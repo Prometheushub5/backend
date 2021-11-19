@@ -11,7 +11,7 @@
 
 # Sobre o projeto
 
-O **PROMETHEUS** é uma aplicação web desenvolvida para captação de leads. É a ultima entrega do curso de desenvolvedor FullStack promovido pela uma [Gama Academy](https://www.gama.academy/ "Site da @Gama").
+O **PROMETHEUS** é uma aplicação web desenvolvida para captação de leads. É a ultima entrega do curso de desenvolvedor FullStack promovido pela [Gama Academy](https://www.gama.academy/ "Site da @Gama").
 
 
 **DEPLOY**
